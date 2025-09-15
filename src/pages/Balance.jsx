@@ -32,7 +32,6 @@ const Balance = () => {
         })
         findamt().then(function (amt) {
             console.log(amt)
-            if (amt > 0)
                 setpbal(amt);
         });
         // Poll every 3 sec
@@ -41,7 +40,6 @@ const Balance = () => {
                 setsbal(res / LAMPORTS_PER_SOL)
             })
             findamt().then(function (amt) {
-                if (amt > 0)
                     setpbal(amt);
             });
             console.log("wallet hua")

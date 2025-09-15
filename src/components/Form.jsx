@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useAtom } from 'jotai';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { pkeyatom } from '../store/src/atoms/pkey';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { loadContext } from '../context';
 
 const Form = () => {
   const nav = useNavigate()
@@ -14,12 +15,14 @@ const Form = () => {
   const [pass, setpass] = useState("");
   const [lmail, setlmail] = useState("");
   const [lpass, setlpass] = useState("");
+  const {load,setload} = useContext(loadContext)
   async function sfxn() {
     if (name.length == 0 || mail.length == 0 || pass.length == 0) {
       toast.error("Please fill in all fields.")
       return;
     }
     try {
+      setload(true)
       const res = await axios.post('https://bonkback.vercel.app/signup', {
         name,
         email: mail,
@@ -44,6 +47,8 @@ const Form = () => {
       }
     } catch (e) {
       console.error(e)
+    }finally{
+      setload(false)
     }
   }
   async function lfxn() {
@@ -52,6 +57,7 @@ const Form = () => {
       return;
     }
     try {
+      setload(true)
       const res = await axios.post('https://bonkback.vercel.app/signin', {
         email: lmail,
         password: lpass
@@ -71,6 +77,8 @@ const Form = () => {
       }
     } catch (e) {
       console.error(e);
+    }finally{
+      setload(false)
     }
 
   }
@@ -91,7 +99,30 @@ const Form = () => {
                 }} className="flip-card__form bg-[#fefbeb]" >
                   <input onChange={(e) => setlmail(e.target.value)} value={lmail} className="flip-card__input" name="email" placeholder="Email" type="email" />
                   <input onChange={(e) => setlpass(e.target.value)} value={lpass} className="flip-card__input" name="password" placeholder="Password" type="password" />
-                  <button type='submit' className="flip-card__btn"><h1 className='text-[20px] font-bold'>Let`s go!</h1></button>
+                 <button
+  type="submit"
+  disabled={load}
+  className={`
+    flip-card__btn
+    text-[20px] font-bold
+    active:shadow-[0px_0px_theme('colors.main')]
+    active:translate-x-[3px]
+    active:translate-y-[3px]
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    disabled:shadow-none
+    disabled:translate-x-0
+    disabled:translate-y-0
+    disabled:hover:bg-[var(--bg-color)]
+    disabled:hover:text-[var(--font-color)]
+    disabled:hover:shadow-[4px_4px_var(--main-color)]
+    disabled:hover:translate-x-0
+    disabled:hover:translate-y-0
+  `}
+>
+  <h1 className="text-[20px] font-bold">Let`s go!</h1>
+</button>
+
                 </form>
               </div>
 
@@ -104,7 +135,30 @@ const Form = () => {
                   <input onChange={(e) => setname(e.target.value)} value={name} className="flip-card__input" placeholder="Name" type="name" />
                   <input onChange={(e) => setmail(e.target.value)} value={mail} className="flip-card__input" name="email" placeholder="Email" type="email" />
                   <input onChange={(e) => setpass(e.target.value)} value={pass} className="flip-card__input" name="password" placeholder="Password" type="password" />
-                  <button type='submit' className="flip-card__btn active:shadow-[0px_0px_theme('colors.main')] active:translate-x-[3px] active:translate-y-[3px]"><h1 className='text-[20px] font-bold'>Confirm</h1></button>
+                 <button
+  type="submit"
+  disabled={load}
+  className={`
+    flip-card__btn
+    text-[20px] font-bold
+    active:shadow-[0px_0px_theme('colors.main')]
+    active:translate-x-[3px]
+    active:translate-y-[3px]
+    disabled:opacity-50
+    disabled:cursor-not-allowed
+    disabled:shadow-none
+    disabled:translate-x-0
+    disabled:translate-y-0
+    disabled:hover:bg-[var(--bg-color)]
+    disabled:hover:text-[var(--font-color)]
+    disabled:hover:shadow-[4px_4px_var(--main-color)]
+    disabled:hover:translate-x-0
+    disabled:hover:translate-y-0
+  `}
+>
+  <h1 className="text-[20px] font-bold">Confirm</h1>
+</button>
+
                 </form>
               </div>
             </div>
@@ -314,6 +368,15 @@ const StyledWrapper = styled.div`
   transform: translate(-2px, -2px); /* slight lift effect */
   box-shadow: 6px 6px var(--main-color); /* bigger shadow */
   transition: all 0.2s ease; /* smooth animation */
+}
+
+.flip-card__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  background-color: var(--bg-color);
+  color: var(--font-color);
 }
 
   .flip-card__btn {
