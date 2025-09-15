@@ -1,0 +1,42 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@theme{
+    --color-ylo-200:#FFE711;
+    --color-ylo-100:#f3e3ab;
+    --color-ylo-50:#fbfbeb;
+    --color-org-100:#f76a06;
+    --color-pnk-100:#FF4F7E;
+    --color-grn-100:#45AD94;
+    --font-robo: "Luckiest Guy", cursive;
+}
+@keyframes wobble {
+  0%, 100% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+}
+
+.animate-wobble:hover {
+  animation: wobble 0.1s ease-in-out infinite;
+}
+
+/* toastStyles.css */
+.toast {
+  background-color: #f3e3ab; /* Background color */
+  color: #333; /* Dark text color for better contrast */
+  border-radius: 8px; /* Rounded corners */
+  padding: 16px; /* Padding */
+  font-family: Arial, sans-serif; /* Font family */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Dark shadow */
+}
+
+.toast.success {
+  background-color: #43aa91; /* Darker shade for success */
+  color: white; /* Text color for success */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Dark shadow for success */
+}
+
+.toast.error {
+  background-color: #ff4d4d; /* Example error color */
+  color: white; /* Text color for error */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Dark shadow for error */
+}
