@@ -5,11 +5,16 @@ This project provides a **full-stack trading platform** where users can:
 
 - Buy and sell **Partoken** on Solana Devnet.
 - View **transaction history** with live status updates (pending → success/failed).
-- Track the **price ratio** of Partoken relative to SOL.
+- Track the **price ratio** of Partoken re
+
+https://github.com/user-attachments/assets/13b4022a-0b76-4c86-931b-4bc87050a29a
+
+lative to SOL.
 - Check **wallet balance** for SOL and Partoken.
 - Export their custodial wallet **private key** for backup.
 
 ---
+
 
 ## 🚀 Tech Stack
 
